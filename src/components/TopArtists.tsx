@@ -45,7 +45,7 @@ const TopArtists: React.FC = () => {
                 cy="50%"
                 outerRadius={180}
               >
-                {artists.map((entry, index) => (
+                {artists.map((_, index) => (
                   <Cell
                     key={`cell-${index}`}
                     fill={COLORS[index % COLORS.length]}
