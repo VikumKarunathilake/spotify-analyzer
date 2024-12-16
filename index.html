@@ -1,13 +1,65 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + React + TS</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+
+<head>
+  <meta charset="UTF-8" />
+
+  <!-- Viewport and Compatibility -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+  <!-- SEO and Description -->
+  <title>Spotify Insights - Your Personal Music Analytics</title>
+  <meta name="description" content="Dive deep into your Spotify listening habits with comprehensive music analytics." />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet" />
+
+  <!-- Favicon and App Icons -->
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="alternate icon" type="image/png" href="/favicon.png" />
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+  <!-- Web Manifest -->
+  <link rel="manifest" href="/manifest.json" />
+
+  <!-- Performance and Connectivity Optimizations -->
+  <link rel="preconnect" href="https://accounts.spotify.com" />
+  <link rel="preconnect" href="https://api.spotify.com" />
+  <link rel="dns-prefetch" href="https://accounts.spotify.com" />
+  <link rel="dns-prefetch" href="https://api.spotify.com" />
+
+  <!-- Expanded Content Security Policy -->
+  <meta http-equiv="Content-Security-Policy" content="
+      default-src 'self';
+      script-src 'self' https://accounts.spotify.com;
+      style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+      font-src 'self' https://fonts.gstatic.com;
+      img-src 'self' data: https:;
+      connect-src 'self' https://accounts.spotify.com https://api.spotify.com;
+      manifest-src 'self';
+    " />
+
+  <!-- Theme and Color -->
+  <meta name="theme-color" content="#1DB954" />
+
+  <!-- Preload Critical Assets -->
+  <link rel="preload" href="/src/main.tsx" as="script" />
+</head>
+
+<body>
+  <noscript>
+    <div style="text-align: center; padding: 20px; background-color: #f0f0f0;">
+      <p>You need to enable JavaScript to run this application.</p>
+    </div>
+  </noscript>
+
+  <div id="root"></div>
+
+  <script type="module" src="/src/main.tsx"></script>
+</body>
+
 </html>

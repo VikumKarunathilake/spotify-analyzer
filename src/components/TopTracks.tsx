@@ -1,12 +1,20 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { useSpotifyApi } from '../hooks/useSpotifyApi';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
 
 type Track = {
+  fullName: string;
   name: string;
   artist: string;
   albumArt: string;
   playCount: number;
+};
+
+type SpotifyTrack = {
+  name: string;
+  artists: { name: string }[];
+  album: { images: { url: string }[] };
+  popularity: number;
 };
 
 const TopTracks: React.FC = () => {
@@ -15,22 +23,31 @@ const TopTracks: React.FC = () => {
   const token = localStorage.getItem('spotify_token') || '';
   const { getUserTopItems } = useSpotifyApi(token);
 
-  useEffect(() => {
-    getUserTopItems('tracks', timeRange).then((items) => {
-      const formattedTracks = items.slice(0, 25).map((item: any) => ({
-        name: item.name,
-        artist: item.artists[0].name,
-        albumArt: item.album.images[0].url,
-        playCount: item.popularity,
-      }));
+  const fetchTracks = useCallback(() => {
+    getUserTopItems('tracks', timeRange).then((items: SpotifyTrack[]) => {
+      const formattedTracks = items.slice(0, 25).map((item) => {
+        const fullName = item.name;
+        const name = fullName.replace(/\([^)]*\)/g, '').replace(/-.*$/, '').trim();
+        return {
+          fullName,
+          name,
+          artist: item.artists[0].name,
+          albumArt: item.album.images[0].url,
+          playCount: item.popularity,
+        };
+      });
       setTracks(formattedTracks);
     });
-  }, [timeRange]);
+  }, [getUserTopItems, timeRange]);
+
+  useEffect(() => {
+    fetchTracks();
+  }, [fetchTracks]);
 
   return (
-    <div className="bg-gradient-to-br from-[#333333] to-[#1f1f1f] rounded-2xl shadow-xl overflow-hidden transition-transform hover:scale-[1.02] duration-300">
+    <div className="bg-gradient-to-br from-[#333333] to-[#1f1f1f] shadow-xl rounded-2xl overflow-hidden transition-transform duration-300">
       <div className="p-6">
-        <h2 className="text-3xl font-bold mb-6 text-[#1bc457]">Top Tracks</h2>
+        <h2 className="text-3xl font-bold mb-6 text-[#ffffff]">Top Tracks</h2>
         <div className="flex flex-wrap gap-2 mb-6">
           {['short_term', 'medium_term', 'long_term'].map((range) => (
             <button
@@ -51,13 +68,16 @@ const TopTracks: React.FC = () => {
           ))}
         </div>
         <div className="bg-[#000000]/50 rounded-xl p-4 mb-6">
-          <ResponsiveContainer width="100%" height={500}>
-            <BarChart data={tracks}>
+          <ResponsiveContainer width="100%" height={700}>
+            <BarChart
+              data={tracks}
+              margin={{ top: 50, right: 10, bottom: 130, left: 10 }} // Adjust the bottom margin
+            >
               <XAxis
                 dataKey="name"
                 tick={{ fill: '#ffffff', fontSize: 12 }}
                 interval={0}
-                angle={-45}
+                angle={-90}
                 textAnchor="end"
               />
               <YAxis tick={{ fill: '#ffffff' }} />
@@ -68,17 +88,14 @@ const TopTracks: React.FC = () => {
                   borderRadius: '8px',
                   padding: '8px',
                 }}
-                labelStyle={{ color: '#1bc457' }}
+                labelStyle={{ color: '#FFFFF' }}
               />
-              <Bar
-                dataKey="playCount"
-                fill="#1bc457"
-                radius={[4, 4, 0, 0]}
-              />
+              <Bar dataKey="playCount" fill="#1bc457" radius={[4, 4, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>
         </div>
-        <ul className="space-y-4">
+
+        <ul className="space-y-3">
           {tracks.map((track, index) => (
             <li
               key={index}
@@ -91,7 +108,7 @@ const TopTracks: React.FC = () => {
               />
               <div className="ml-4 flex-1">
                 <h3 className="font-semibold text-[#1bc457] text-lg mb-1">
-                  {track.name}
+                  {track.fullName}
                 </h3>
                 <p className="text-sm text-gray-400">{track.artist}</p>
               </div>
@@ -107,4 +124,3 @@ const TopTracks: React.FC = () => {
 };
 
 export default TopTracks;
-

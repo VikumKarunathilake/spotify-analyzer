@@ -18,7 +18,7 @@ const TopArtists: React.FC = () => {
 
   useEffect(() => {
     getUserTopItems('artists', 'medium_term').then((items) => {
-      const formattedArtists = items.slice(0, 5).map((item: any) => ({
+      const formattedArtists = items.slice(0, 10).map((item: any) => ({
         name: item.name,
         profileImage: item.images[0]?.url,
         totalListeningTime: item.popularity,
@@ -29,12 +29,14 @@ const TopArtists: React.FC = () => {
   }, []);
 
   return (
-    <div className="bg-gradient-to-br from-[#333333] to-[#1f1f1f] rounded-2xl shadow-xl overflow-hidden transition-transform hover:scale-[1.02] duration-300">
+    <div className="bg-gradient-to-br from-[#333333] to-[#1f1f1f] rounded-2xl shadow-xl overflow-hidden transition-transform duration-300">
       <div className="p-6">
         <h2 className="text-3xl font-bold mb-6 text-[#1bc457]">Top Artists</h2>
         <div className="bg-[#000000]/50 rounded-xl p-4 mb-6">
           <ResponsiveContainer width="100%" height={500}>
-            <PieChart>
+            <PieChart
+            margin={{ top: 50, right: 10, bottom: 130, left: 10 }}
+            >
               <Pie
                 data={artists}
                 dataKey="totalListeningTime"
