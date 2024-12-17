@@ -1,56 +1,64 @@
-Create a React + Vite + TypeScript Spotify User Insights Dashboard that provides deep, visually appealing analytics about a user's music listening habits. The dashboard should include the following features:
+# Spotify User Insights Dashboard
 
-📊 Dashboard Components:
-1. Top Tracks Section
-   - Display top 10 most listened tracks
-   - Show track artwork, name, artist, and total play count
-   - Sortable by different time ranges (last month, 6 months, all time)
+A React + Vite + TypeScript web application that provides visually appealing analytics about a user's Spotify listening habits.
 
-2. Top Artists Section
-   - Showcase top artists with their profile images
-   - Include total listening time for each artist
-   - Genre distribution visualization
-   - Ability to drill down into artist details
+---
 
-3. Listening Time Analytics
-   - Breakdown of total listening time
-   - Time spent by genre
-   - Time spent by day of week
-   - Time spent by time of day
-   - Comparative charts showing listening trends
+## Features
 
-4. Music Personality Insights
-   - Generate a "music personality" based on listening habits
-   - Show dominant genres
-   - Highlight unique listening characteristics
-   - Comparison with global/friend averages if possible
+### Dashboard Components
 
-5. Mood and Energy Analysis
-   - Aggregate track audio features (danceability, energy, valence)
-   - Visualize mood progression over time
-   - Identify most common audio characteristics in user's top tracks
+1. **Top Tracks Section**
 
-🔧 Technical Requirements:
-- Use Spotify Web API for data retrieval
-- Implement secure token-based authentication
-- Create responsive, mobile-friendly design
-- Use modern React hooks and functional components
-- Implement TypeScript for type safety
-- Use recharts or visx for data visualizations
-- Use lient-side rendering for time (i dont have backend server)
+   - Display top 25 most listened tracks.
+   - Shows track artwork, name, artist, and total play count.
+   - Sortable by different time ranges (Last Month, 6 Months, All Time).
 
-📦 Additional Features:
-- Animated, interactive charts
-- Caching of API responses to reduce unnecessary calls
+2. **Top Artists Section**
 
-🔒 Authentication:
-- Secure Spotify OAuth flow
-- Token management
-- Refresh token handling
-- Logout functionality
+   - Showcase top artists with their profile images.
+   - Includes total listening time for each artist.
+   - Genre distribution visualization.
+   - Drill-down into artist details.
 
-💡 Bonus Points:
-- Implement lient-side rendering for initial load performance
-- Add accessibility features
-- Create custom hooks for Spotify API interactions
-- Implement
+---
+
+## Technologies Used
+
+- **Frontend:** React, Vite, TypeScript
+- **Data Visualization:** Recharts
+- **API Integration:** Spotify Web API
+- **Styling:** Tailwind CSS
+- **Authentication:** Spotify OAuth
+
+---
+
+## Key Features Implementation
+
+- **Spotify OAuth Flow**:
+
+  - Secure authentication using Spotify's Web API.
+  - Token management and refresh token handling.
+
+- **Data Visualization**:
+
+  - Recharts for interactive and animated charts.
+  - Custom tooltips, axes, and responsive designs.
+
+- **Responsive Design**:
+
+  - Tailwind CSS ensures the application is mobile-friendly.
+
+---
+
+## Contributing
+
+Contributions are welcome! Feel free to open an issue or submit a pull request. Ensure all changes are thoroughly tested.
+
+---
+
+## Acknowledgments
+
+- [Spotify Developer Platform](https://developer.spotify.com/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [Recharts](https://recharts.org/)
